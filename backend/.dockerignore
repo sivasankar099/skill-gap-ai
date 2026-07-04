@@ -1,0 +1,13 @@
+target
+**/target
+.mvn
+.git
+**/.git
+**/.idea
+**/*.iml
+*.log
+*.tmp
+*.bak
+.DS_Store
+Dockerfile
+docker-compose*.yml

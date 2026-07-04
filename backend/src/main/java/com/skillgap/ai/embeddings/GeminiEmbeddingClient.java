@@ -21,7 +21,7 @@ public class GeminiEmbeddingClient {
 
     public GeminiEmbeddingClient(RestTemplate restTemplate,
                                  ObjectMapper objectMapper,
-                                 @Value("${gemini.api.key}") String apiKey,
+                                 @Value("${GEMINI_API_KEY:${gemini.api.key:}}") String apiKey,
                                  @Value("${gemini.api.url}") String apiUrl) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
