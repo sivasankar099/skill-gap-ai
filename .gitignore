@@ -1,6 +1,6 @@
 # Ignore environment files and local secrets
 .env
-.env.*
+
 
 # Ignore backend build and local database artifacts
 /backend/target/
