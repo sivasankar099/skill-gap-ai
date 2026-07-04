@@ -44,13 +44,11 @@ export const authService = {
     return response.data; // Returns { token, username }
   },
   register: async (username, password) => {
-    const response = await api.post('/api/auth/register', { username, password }); // Note: endpoint is /api/auth/register, but base URL is already /api, wait: /auth/register is correct since base URL is /api
+    const response = await api.post('/auth/register', { username, password });
     return response.data;
   },
 };
 
-// Wait! In AuthController, the mapping is "/api/auth/register" and "/api/auth/login", so:
-// base url is '/api', so we post to '/auth/register' and '/auth/login'.
 export const apiService = {
   register: async (username, password) => {
     const response = await api.post('/auth/register', { username, password });

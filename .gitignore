@@ -1,0 +1,37 @@
+# Ignore environment files and local secrets
+.env
+.env.*
+
+# Ignore backend build and local database artifacts
+/backend/target/
+/backend/data/
+/backend/*.log
+/backend/*.iml
+/backend/*.class
+/backend/*.jar
+/backend/*.war
+/backend/*.ear
+/backend/hs_err_pid*
+/backend/.idea/
+/backend/.vscode/
+
+# Ignore frontend build and dependencies
+/frontend/node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/.cache/
+/frontend/coverage/
+/frontend/*.log
+/frontend/*.local
+/frontend/.idea/
+/frontend/.vscode/
+
+# Ignore IDE files
+/.idea/
+/.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
