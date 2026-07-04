@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-slate-950;
+    margin: 0;
+  }
+}
+
+/* Glassmorphism utility styles */
+.glass {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-emerald {
+  background: rgba(16, 185, 129, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.glass-rose {
+  background: rgba(244, 63, 94, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(244, 63, 94, 0.1);
+}
+
+/* Premium gradient texts */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400;
+}
+
+.gradient-text-orange {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-rose-500;
+}
+
+/* Custom Scrollbar for dashboard list */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700;
+}
