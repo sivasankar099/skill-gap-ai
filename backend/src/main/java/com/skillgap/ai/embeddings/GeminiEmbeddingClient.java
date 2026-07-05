@@ -34,7 +34,7 @@ public class GeminiEmbeddingClient {
             throw new IllegalStateException("Gemini API key is not configured.");
         }
 
-        String endpointUrl = apiUrl + "/text-embedding-004:embedContent?key=" + apiKey;
+        String endpointUrl = apiUrl + "/gemini-embedding-001:embedContent?key=" + apiKey;
 
         try {
             Map<String, Object> requestBody = new HashMap<>();

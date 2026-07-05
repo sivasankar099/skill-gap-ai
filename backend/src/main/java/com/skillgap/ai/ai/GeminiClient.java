@@ -109,11 +109,18 @@ public class GeminiClient {
             // Execute POST request
             String responseStr = restTemplate.postForObject(endpointUrl, requestEntity, String.class);
 
-            // Read candidate content
             JsonNode rootNode = objectMapper.readTree(responseStr);
-            JsonNode textNode = rootNode.path("candidates").get(0)
-                    .path("content").path("parts").get(0).path("text");
-
+            JsonNode candidates = rootNode.path("candidates");
+            if (candidates.isMissingNode() || !candidates.isArray() || candidates.size() == 0) {
+                throw new RuntimeException("Gemini returned no candidates! Raw response: " + responseStr);
+            }
+            
+            JsonNode candidate = candidates.get(0);
+            if (candidate == null) {
+                throw new RuntimeException("Candidate is null! Raw response: " + responseStr);
+            }
+            
+            JsonNode textNode = candidate.path("content").path("parts").get(0).path("text");
             String jsonText = textNode.asText();
 
             // Deserialize to DTO
@@ -176,8 +183,10 @@ public class GeminiClient {
             Map<String, Object> weekProps = new HashMap<>();
             weekProps.put("weekNumber", Collections.singletonMap("type", "INTEGER"));
             weekProps.put("focus", Collections.singletonMap("type", "STRING"));
-            weekProps.put("topics", Collections.singletonMap("type", "ARRAY"));
-            ((Map<String, Object>)weekProps.get("topics")).put("items", Collections.singletonMap("type", "STRING"));
+            Map<String, Object> topicsSchema = new HashMap<>();
+            topicsSchema.put("type", "ARRAY");
+            topicsSchema.put("items", Collections.singletonMap("type", "STRING"));
+            weekProps.put("topics", topicsSchema);
             weekProps.put("outcome", Collections.singletonMap("type", "STRING"));
             weekItemSchema.put("properties", weekProps);
             weekItemSchema.put("required", Arrays.asList("weekNumber", "focus", "topics", "outcome"));
@@ -196,8 +205,17 @@ public class GeminiClient {
             String responseStr = restTemplate.postForObject(endpointUrl, requestEntity, String.class);
 
             JsonNode rootNode = objectMapper.readTree(responseStr);
-            return rootNode.path("candidates").get(0)
-                    .path("content").path("parts").get(0).path("text").asText();
+            JsonNode candidates = rootNode.path("candidates");
+            if (candidates.isMissingNode() || !candidates.isArray() || candidates.size() == 0) {
+                throw new RuntimeException("Gemini returned no candidates! Raw response: " + responseStr);
+            }
+            
+            JsonNode candidate = candidates.get(0);
+            if (candidate == null) {
+                throw new RuntimeException("Candidate is null! Raw response: " + responseStr);
+            }
+            
+            return candidate.path("content").path("parts").get(0).path("text").asText();
 
         } catch (Exception ex) {
             throw new RuntimeException("Failed to generate career roadmap using Gemini: " + ex.getMessage(), ex);

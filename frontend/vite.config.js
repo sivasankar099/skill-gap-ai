@@ -5,8 +5,11 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '../', '')
   return {
     plugins: [react()],
+    server: {
+      port: 7777
+    },
     define: {
-      'import.meta.env.VITE_API_BASE_URL': JSON.stringify(env.VITE_API_BASE_URL || 'http://localhost:8080/api'),
+      'import.meta.env.VITE_API_BASE_URL': JSON.stringify(env.VITE_API_BASE_URL || 'http://localhost:9091/api'),
       __APP_ENV__: JSON.stringify(env.APP_ENV || 'development'),
     },
   }
