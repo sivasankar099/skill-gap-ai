@@ -66,7 +66,7 @@ public class QdrantClient {
 
         Map<String, Object> body = new HashMap<>();
         Map<String, Object> vectors = new HashMap<>();
-        vectors.put("size", 768); // Matching Gemini text-embedding-004
+        vectors.put("size", 3072); // Matching Gemini text-embedding-004 actual output dimension
         vectors.put("distance", "Cosine");
         body.put("vectors", vectors);
 
